@@ -2,6 +2,7 @@ import { Request } from 'express';
 import { THttpError } from '../../types';
 import { EApplicationEnvironment, ResponseMessage } from '../constants';
 import { ServerConfig } from '../../config';
+import { Logger } from '../commons';
 
 export default (err: Error | unknown, req: Request, errorStatusCode: number = 500) => {
     const errorObj: THttpError = {
@@ -18,8 +19,7 @@ export default (err: Error | unknown, req: Request, errorStatusCode: number = 50
     };
 
     // log the response
-    // eslint-disable-next-line no-console
-    console.log(`CONTROLLER_ERROR_RESPONSE`, { meta: errorObj });
+    Logger.log(`CONTROLLER_ERROR_RESPONSE`, { meta: errorObj });
 
     // production ENV check
     if (ServerConfig.ENV === EApplicationEnvironment.PRODUCTION) {
