@@ -1,6 +1,6 @@
 import { Request } from 'express';
 import { THttpError } from '../../types';
-import { EApplicationEnvironment, ResponseMessage } from '../constants';
+import { EApplicationEnvironment, EApplicationEvents, ResponseMessage } from '../constants';
 import { ServerConfig } from '../../config';
 import { Logger } from '../commons';
 
@@ -19,7 +19,7 @@ export default (err: Error | unknown, req: Request, errorStatusCode: number = 50
     };
 
     // log the response
-    Logger.error(`CONTROLLER_ERROR_RESPONSE`, { meta: errorObj });
+    Logger.error(EApplicationEvents.CONTROLLER_ERROR_RESPONSE, { meta: errorObj });
 
     // production ENV check
     if (ServerConfig.ENV === EApplicationEnvironment.PRODUCTION) {

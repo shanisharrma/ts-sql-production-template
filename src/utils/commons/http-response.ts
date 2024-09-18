@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { THttpResponse } from '../../types';
 import { ServerConfig } from '../../config';
-import { EApplicationEnvironment } from '../constants';
+import { EApplicationEnvironment, EApplicationEvents } from '../constants';
 import { Logger } from '.';
 
 export default (req: Request, res: Response, responseStatusCode: number, responseMessage: string, data: unknown = null): void => {
@@ -18,7 +18,7 @@ export default (req: Request, res: Response, responseStatusCode: number, respons
     };
 
     // log the response
-    Logger.info(`CONTROLLER_SUCCESS_RESPONSE`, { meta: response });
+    Logger.info(EApplicationEvents.CONTROLLER_SUCCESS_RESPONSE, { meta: response });
 
     // production ENV check
     if (ServerConfig.ENV === EApplicationEnvironment.PRODUCTION) {

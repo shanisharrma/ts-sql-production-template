@@ -2,7 +2,7 @@ import { createLogger, format, transports } from 'winston';
 import { ConsoleTransportInstance, FileTransportInstance } from 'winston/lib/winston/transports';
 import util from 'util';
 import { ServerConfig } from '../../config';
-import { EApplicationEnvironment } from '../constants';
+import { EApplicationEnvironment, ELogLevel } from '../constants';
 import path from 'path';
 import { red, blue, green, yellow, magenta } from 'colorette';
 import * as sourceMapSupport from 'source-map-support';
@@ -13,11 +13,11 @@ sourceMapSupport.install();
 // Selecting color for defined level
 const colorizeLevel = (level: string) => {
     switch (level) {
-        case 'info':
+        case ELogLevel.INFO:
             return blue(level);
-        case 'error':
+        case ELogLevel.ERROR:
             return red(level);
-        case 'warn':
+        case ELogLevel.WARN:
             return yellow(level);
         default:
             return level;
@@ -36,7 +36,7 @@ const consoleLogFormat = format.printf((info) => {
         colors: true,
     });
 
-    const customLog = `${customLevel} [${customTimeStamp}] ${customMessage}\n${magenta('META')} ${customMeta}`;
+    const customLog = `${customLevel} [${customTimeStamp}] ${customMessage}\n${magenta(ELogLevel.META)} ${customMeta}`;
     return customLog;
 });
 
