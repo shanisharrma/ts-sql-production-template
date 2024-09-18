@@ -18,7 +18,7 @@ export default (req: Request, res: Response, responseStatusCode: number, respons
     };
 
     // log the response
-    Logger.log(`CONTROLLER_SUCCESS_RESPONSE`, { meta: response });
+    Logger.info(`CONTROLLER_SUCCESS_RESPONSE`, { meta: response });
 
     // production ENV check
     if (ServerConfig.ENV === EApplicationEnvironment.PRODUCTION) {

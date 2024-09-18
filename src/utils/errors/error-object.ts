@@ -19,7 +19,7 @@ export default (err: Error | unknown, req: Request, errorStatusCode: number = 50
     };
 
     // log the response
-    Logger.log(`CONTROLLER_ERROR_RESPONSE`, { meta: errorObj });
+    Logger.error(`CONTROLLER_ERROR_RESPONSE`, { meta: errorObj });
 
     // production ENV check
     if (ServerConfig.ENV === EApplicationEnvironment.PRODUCTION) {

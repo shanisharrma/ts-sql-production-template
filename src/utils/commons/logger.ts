@@ -4,19 +4,39 @@ import util from 'util';
 import { ServerConfig } from '../../config';
 import { EApplicationEnvironment } from '../constants';
 import path from 'path';
+import { red, blue, green, yellow, magenta } from 'colorette';
+import * as sourceMapSupport from 'source-map-support';
+
+// Linking Typescript Compiler Trace Support
+sourceMapSupport.install();
+
+// Selecting color for defined level
+const colorizeLevel = (level: string) => {
+    switch (level) {
+        case 'info':
+            return blue(level);
+        case 'error':
+            return red(level);
+        case 'warn':
+            return yellow(level);
+        default:
+            return level;
+    }
+};
 
 const consoleLogFormat = format.printf((info) => {
     const { level, message, timestamp, meta = {} } = info;
 
-    const customLevel = level.toUpperCase();
+    const customLevel = colorizeLevel(level.toUpperCase());
     const customMessage = message;
-    const customTimeStamp = timestamp;
+    const customTimeStamp = green(timestamp);
     const customMeta = util.inspect(meta, {
         showHidden: false,
         depth: null,
+        colors: true,
     });
 
-    const customLog = `${customLevel} [${customTimeStamp}] ${customMessage}\n${'Meta'} ${customMeta}`;
+    const customLog = `${customLevel} [${customTimeStamp}] ${customMessage}\n${magenta('META')} ${customMeta}`;
     return customLog;
 });
 
