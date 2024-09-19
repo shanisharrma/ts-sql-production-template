@@ -1,5 +1,5 @@
 import app from './app';
-import { ServerConfig } from './config';
+import { initRateLimiter, ServerConfig } from './config';
 import connection from './database/sequelize';
 import { Logger } from './utils/commons';
 import { EApplicationEvents } from './utils/constants';
@@ -8,7 +8,12 @@ const server = app.listen(ServerConfig.PORT);
 
 (() => {
     try {
+        // Database connection check
         if (connection) Logger.info(EApplicationEvents.DATABASE_CONNECTED, { meta: {} });
+
+        // Rate Limiter
+        initRateLimiter(connection);
+        Logger.info(EApplicationEvents.RATE_LIMITER_INITIATED);
 
         Logger.info(EApplicationEvents.APPLICATION_STARTED, { meta: { PORT: ServerConfig.PORT, URL: ServerConfig.SERVER_URL } });
     } catch (error) {
