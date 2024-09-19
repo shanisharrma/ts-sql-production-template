@@ -6,6 +6,7 @@ import { EApplicationEnvironment, ELogLevel } from '../constants';
 import path from 'path';
 import { red, blue, green, yellow, magenta } from 'colorette';
 import * as sourceMapSupport from 'source-map-support';
+import SequelizeTransport from '../sequelize-transport';
 
 // Linking Typescript Compiler Trace Support
 sourceMapSupport.install();
@@ -88,9 +89,18 @@ const fileTransport = (): Array<FileTransportInstance> => {
     ];
 };
 
+// Custom Sequelize transport for logging into the database
+const sequelizeTransport = (): SequelizeTransport[] => {
+    return [
+        new SequelizeTransport({
+            level: 'info',
+        }),
+    ];
+};
+
 export default createLogger({
     defaultMeta: {
         meta: {},
     },
-    transports: [...fileTransport(), ...consoleTransport()],
+    transports: [...fileTransport(), ...consoleTransport(), ...sequelizeTransport()],
 });
