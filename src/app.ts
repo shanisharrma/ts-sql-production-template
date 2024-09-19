@@ -3,11 +3,19 @@ import path from 'path';
 import apiRoutes from './routes';
 import { GlobalErrorHandler, NotFoundErrorHandler } from './middlewares';
 import helmet from 'helmet';
+import cors from 'cors';
 
 const app = express();
 
 // Middlewares
 app.use(helmet());
+app.use(
+    cors({
+        methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'HEAD'],
+        origin: ['https://client.com'],
+        credentials: true,
+    }),
+);
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '../', 'public')));
 
