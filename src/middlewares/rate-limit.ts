@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import { rateLimiterMySQL, ServerConfig } from '../config';
 import { EApplicationEnvironment, ResponseMessage } from '../utils/constants';
 import { HttpError } from '../utils/commons';
+import { StatusCodes } from 'http-status-codes';
 
 export default (req: Request, _: Response, next: NextFunction) => {
     if (ServerConfig.ENV === EApplicationEnvironment.DEVELOPMENT) {
@@ -16,7 +17,7 @@ export default (req: Request, _: Response, next: NextFunction) => {
             })
             .catch(() => {
                 // Too many requests, return 429
-                HttpError(next, new Error(ResponseMessage.TOO_MANY_REQUESTS), req, 429);
+                HttpError(next, new Error(ResponseMessage.TOO_MANY_REQUESTS), req, StatusCodes.TOO_MANY_REQUESTS);
             });
     }
 };
