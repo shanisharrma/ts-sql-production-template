@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
-import { ResponseMessage } from '../utils/constants';
-import { HttpError } from '../utils/commons';
+import { ResponseMessage } from '../../utils/constants';
+import { HttpError } from '../../utils/commons';
 import { StatusCodes } from 'http-status-codes';
 
 export default (req: Request, _: Response, next: NextFunction) => {
