@@ -166,7 +166,17 @@ RATE_LIMIT_BLOCK_WINDOW=600 # 600 seconds
 Sequelize migrations are used for database versioning. Run the following command to execute migrations:
 
 ```bash
+# basic migration command for sequelize ORM
 npx sequelize-cli db:migrate
+
+# the above command will run if we are using dotenv lib but here we are using dotenv-flow and cross-env lib
+# for dynamically change of environments
+# so use `npx cross-env NODE_ENV=development` before every sequelize command to run in development environment
+# and for production use NODE_ENV as production instead of development
+# below command is for development environment
+npx cross-env NODE_ENV=development sequelize-cli db:migrate
+
+# we have described scripts in `package.json` file so use those command at the time of initialization.
 ```
 
 ## Contributing
