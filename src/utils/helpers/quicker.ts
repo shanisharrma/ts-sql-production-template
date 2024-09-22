@@ -1,16 +1,16 @@
 import os from 'os';
 import { ServerConfig } from '../../config';
 
-export default {
-    getSystemHealth: () => {
+export class Quicker {
+    public static getSystemHealth() {
         return {
             cpuUsage: os.loadavg(),
             totalMemory: `${(os.totalmem() / 1024 / 1024).toFixed(2)} MB`,
             freeMemory: `${(os.freemem() / 1024 / 1024).toFixed(2)} MB`,
         };
-    },
+    }
 
-    getApplicationHealth: () => {
+    public static getApplicationHealth() {
         return {
             environment: ServerConfig.ENV,
             uptime: `${process.uptime().toFixed(2)} seconds`,
@@ -19,5 +19,5 @@ export default {
                 heapUsed: `${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB`,
             },
         };
-    },
-};
+    }
+}

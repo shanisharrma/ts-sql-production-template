@@ -1,3 +1,3 @@
-import Quicker from './quicker';
+import { Quicker } from './quicker';
 
 export { Quicker };

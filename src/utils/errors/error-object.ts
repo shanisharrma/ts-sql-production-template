@@ -1,31 +1,33 @@
-import { Request } from 'express';
-import { THttpError } from '../../types';
-import { EApplicationEnvironment, EApplicationEvents, ResponseMessage } from '../constants';
-import { ServerConfig } from '../../config';
-import { Logger } from '../commons';
+import { Request } from 'express'; // Importing Express Request type for type safety.
+import { THttpError } from '../../types'; // Importing custom type for HTTP errors.
+import { EApplicationEnvironment, EApplicationEvents, ResponseMessage } from '../constants'; // Importing constants for environment and responses.
+import { ServerConfig } from '../../config'; // Importing server configuration settings.
+import { Logger } from '../commons'; // Importing logger for logging errors.
 
 export default (err: Error | unknown, req: Request, errorStatusCode: number = 500) => {
+    // Constructing the error response object
     const errorObj: THttpError = {
         success: false,
-        statusCode: errorStatusCode,
+        statusCode: errorStatusCode, // Status code for the response.
         request: {
-            ip: req.ip || null,
-            method: req.method,
-            url: req.originalUrl,
+            ip: req.ip || null, // Capturing request IP address.
+            method: req.method, // HTTP method of the request.
+            url: req.originalUrl, // URL of the request.
         },
-        message: err instanceof Error ? err.message || ResponseMessage.SOMETHING_WENT_WRONG : ResponseMessage.SOMETHING_WENT_WRONG,
-        data: err,
-        trace: err instanceof Error ? { error: err.stack } : null,
+        message: err instanceof Error ? err.message || ResponseMessage.SOMETHING_WENT_WRONG : ResponseMessage.SOMETHING_WENT_WRONG, // Error message.
+        data: err, // Original error data for debugging.
+        trace: err instanceof Error ? { error: err.stack } : null, // Stack trace for the error, if available.
     };
 
-    // log the response
+    // Log the error response using the logger
     Logger.error(EApplicationEvents.CONTROLLER_ERROR_RESPONSE, { meta: errorObj });
 
-    // production ENV check
+    // Check if the environment is production
     if (ServerConfig.ENV === EApplicationEnvironment.PRODUCTION) {
-        delete errorObj.request.ip;
-        delete errorObj.trace;
+        // Remove sensitive information from the error response in production
+        delete errorObj.request.ip; // Avoid exposing the client's IP address.
+        delete errorObj.trace; // Avoid exposing stack traces in production.
     }
 
-    return errorObj;
+    return errorObj; // Return the constructed error object for the response.
 };
