@@ -133,7 +133,9 @@ RATE_LIMIT_BLOCK_WINDOW=<block_time_window_in_seconds>
 
 4. `npm run dist`: Build the TypeScript code into JavaScript.
 
-5. `npm run db:migrate`: Run this to migrate all the required db migrations.
+5. `npm run db:migrate:dev`: Run this to migrate all the required db migrations for development.
+
+6. `npm run db:migrate:prod`: Run this to migrate all the required db migrations for production.
 
 ## Error Handling
 
