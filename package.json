@@ -7,7 +7,8 @@
         "dev": "cross-env NODE_ENV=development nodemon --legacy-watch src/server.ts",
         "start": "cross-env NODE_ENV=production node dist/server.js",
         "lint": "eslint .",
-        "db:migrate": "npx sequelize db:migrate",
+        "db:migrate:dev": "cross-env NODE_ENV=development sequelize db:migrate",
+        "db:migrate:prod": "cross-env NODE_ENV=production sequelize db:migrate",
         "lint:fix": "eslint . --fix",
         "format:check": "prettier . --check",
         "format:fix": "prettier . --fix",
@@ -61,4 +62,3 @@
         "winston": "^3.14.2"
     }
 }
-
