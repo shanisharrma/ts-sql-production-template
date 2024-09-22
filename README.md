@@ -171,3 +171,4 @@ Contributions are welcome! Please fork the repository, create a feature branch, 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 You can adapt this template based on any additional project-specific details. Let me know if you'd like to adjust anything!
+

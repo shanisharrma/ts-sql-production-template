@@ -18,3 +18,4 @@ export default {
     RATE_LIMIT_WINDOW: process.env.RATE_LIMIT_WINDOW,
     RATE_LIMIT_BLOCK_WINDOW: process.env.RATE_LIMIT_BLOCK_WINDOW,
 };
+

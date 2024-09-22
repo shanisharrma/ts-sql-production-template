@@ -15,3 +15,4 @@ export const initRateLimiter = (sequelizeConnection: Sequelize) => {
         blockDuration: Number(ServerConfig.RATE_LIMIT_BLOCK_WINDOW),
     });
 };
+
