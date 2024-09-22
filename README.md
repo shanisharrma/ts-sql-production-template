@@ -74,30 +74,32 @@ npm run start
 ```bash
 ├── .husky
 ├── docker
-    ├── development/    # Docker Configuration for development
-    └── production/     # Docker Configuration for development
-├── logs                # # Winston log files, separate files for each environment
+    ├── development/            # Docker Configuration for development
+    └── production/             # Docker Configuration for development
+├── logs                        # Winston log files, separate files for each environment
 ├── nginx
-├── public              # Stores all the static files
-├── scripts             # Additional scripting files
+├── public                      # Stores all the static files
+├── scripts                     # Additional scripting files
 ├── src/
-    ├── controllers/    # All API controllers
-    ├── database/       # Sequelize models, migrations, and configurations
-        ├── models/     # All models files
-        ├── migrations/ # All migrations files
-        └── seeders/    # All seeder files
-    ├── middlewares/    # Custom middleware (error handling, rate limiting)
-    ├── repositories    # Database Model connection
-    ├── routes          # All API routes (v1, v2, etc.)
-    ├── services/       # Business logic services
-    ├── types/          # Stores all the types defined in typescript
-    ├── utils/          # Utility functions and helpers
-        ├── commons/    # Common files for every files
-        ├── constants/  # Enums and Application's constant string variables
-        ├── errors/     # Error Object
-        └── helpers/    # Helper functions
-    ├── config/         # Configuration files
-    └── view/           # View files for template engines
+    ├── controllers/            # All API controllers
+    ├── database/               # Sequelize models, migrations, and configurations
+        ├── models/             # All models files
+        ├── migrations/         # All migrations files
+        └── seeders/            # All seeder files
+    ├── middlewares/            # Custom middleware (error handling, rate limiting)
+        └── error-handlers/     # Global Error Handlers
+    ├── repositories            # Database Model connection
+    ├── routes                  # All API routes (v1, v2, etc.)
+    ├── schemas/                # All the request body validation schema
+    ├── services/               # Business logic services
+    ├── types/                  # Stores all the types defined in typescript
+    ├── utils/                  # Utility functions and helpers
+        ├── commons/            # Common files for every files
+        ├── constants/          # Enums and Application's constant string variables
+        ├── errors/             # Error Object
+        └── helpers/            # Helper functions
+    ├── config/                 # Configuration files
+    └── view/                   # View files for template engines
 └──tests
 ```
 
@@ -128,7 +130,10 @@ RATE_LIMIT_BLOCK_WINDOW=<block_time_window_in_seconds>
 2. `npm run start`: Run the production server.
 
 3. `npm run lint`: Lint the TypeScript code.
+
 4. `npm run dist`: Build the TypeScript code into JavaScript.
+
+5. `npm run db:migrate`: Run this to migrate all the required db migrations.
 
 ## Error Handling
 
@@ -171,4 +176,3 @@ Contributions are welcome! Please fork the repository, create a feature branch, 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 You can adapt this template based on any additional project-specific details. Let me know if you'd like to adjust anything!
-
