@@ -1,19 +1,11 @@
 'use strict';
-import { DataTypes, Model } from 'sequelize';
+import { DataTypes, Model, Optional } from 'sequelize';
 import connection from '../sequelize';
+import { ILogAttributes } from '../../types';
 
-interface ILogAttributes {
-    id?: number;
-    level: string;
-    message: string;
-    meta?: string;
-    timestamp: Date;
-    createdAt?: Date;
-    deletedAt?: Date;
-    updatedAt?: Date;
-}
+type TLogCreationAttributes = Optional<ILogAttributes, 'id'>;
 
-class Log extends Model<ILogAttributes> implements ILogAttributes {
+class Log extends Model<ILogAttributes, TLogCreationAttributes> implements ILogAttributes {
     public id!: number;
     public level!: string;
     public message!: string;

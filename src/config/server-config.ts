@@ -14,9 +14,10 @@ export default {
     DB_PASS: process.env.DB_PASS, // Database password.
     DB_NAME: process.env.DB_NAME, // Database name.
     DB_HOST: process.env.DB_HOST, // Database host.
+    DB_PORT: process.env.DB_PORT, // Database port.
 
-    // Rate Limiting Configuration
-    RATE_LIMIT_MAX: process.env.RATE_LIMIT_MAX, // Max requests in a time window.
-    RATE_LIMIT_WINDOW: process.env.RATE_LIMIT_WINDOW, // Duration for points validity.
-    RATE_LIMIT_BLOCK_WINDOW: process.env.RATE_LIMIT_BLOCK_WINDOW, // Block duration after limit exceeded.
+    // Rate Limiter Configuration
+    POINTS: Number(process.env.POINTS), // Max requests in a time window.
+    DURATION: Number(process.env.DURATION), // Duration for points validity.
+    BLOCK_DURATION: Number(process.env.BLOCK_DURATION), // Block duration after limit exceeded.
 };
